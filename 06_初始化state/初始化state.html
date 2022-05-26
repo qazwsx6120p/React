@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 準備好一個容器 -->
+  <div id="test"></div>
+
+  <!-- 引入react核心庫-->
+  <script type="text/javascript" src="../JS/react.development.js"></script>
+  <!-- 引入react-dom用於支持react操作DOM -->
+  <script type="text/javascript" src="../JS/react-dom.development.js"></script>
+  <!-- 引入babel 用於將jsx轉為js -->
+  <script type="text/javascript" src="../JS/babel.min.js"></script>
+  <!-- 此處一定要寫babel -->
+  <script type="text/babel">
+    //1.創建組件
+    class Weather extends React.Component {
+      constructor(props) {
+        super(props)
+        //初始化狀態，用物件表示
+        this.state = { isHot: true };
+        //將Weather的changeWeather函數指向Weather然後賦值給Weather
+        //讓Weather裡有changeWeather的這個函數
+        //解決changeWeather中this指向問題
+        this.changeWeather=this.changeWeather.bind(this);
+      }
+      render() {
+        console.log(this)
+        //用三元運算子去判斷，如果isHot為true是炎熱，是false為涼爽
+        //給h1綁定onClick事件，並綁定changeWeather函數
+        return <h1 onClick={this.changeWeather}>今天天氣很{this.state.isHot ? '炎熱' : '涼爽'}</h1>
+      }
+      //changeWeather方法放在哪? -- 類的原型對象上，供實例使用
+      //由於changeWeather是作為onClick的回調，所以不是通過實例調用，是直接調用
+      //類中的方法默認開啟了局部的嚴格模式，所以changeWeather中的this為undefined
+      changeWeather() {
+        console.log(this);
+      }
+    }
+    //2.渲染組件到頁面
+    ReactDOM.render(<Weather />, document.getElementById("test"));
+
+
+  </script>
+</body>
+
+</html>

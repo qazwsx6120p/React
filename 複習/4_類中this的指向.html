@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    class Person {
+      constructor(name, age) {
+        this.name = name;
+        this.age = age;
+      }
+
+      speak() {
+        //speak方法放在哪? -- 類的原型對象上，供實例使用
+        //通過Person實例調用speak時，speak中的this就是Person實例
+        console.log(this);
+      }
+    }
+    const p1 = new Person('tom', 19);
+    p1.speak(); //通過實例調用speak方法
+    const x = p1.speak
+    x();
+
+  </script>
+</body>
+
+</html>
