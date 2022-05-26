@@ -38,23 +38,38 @@
     class Student extends Person {
       //當定義一個類別並繼承另外一個類別，並且創建構造器 constructor
       //需使用super語法
-      constructor(name,age,gende){
+      constructor(name, age, gende) {
         //super(繼承的屬性)和方法，必須在最開始調用
-        super(name,age);
-        this.gende=gende;
-        this.school="尚硅谷"; //如果大家都是尚珪谷上課，可以寫死
+        super(name, age);
+        this.gende = gende;
+        this.school = "尚硅谷"; //如果大家都是尚珪谷上課，可以寫死
       }
       speak() {
         console.log(`我叫${this.name}，我年齡是${this.age}，我讀的是${this.gende}`);
       }
-      study(){
+      study() {
         //study方法放在哪? -- 類的原型對象上，供實例使用
         //通過Student實例調用study時，study中的this就是Student實例
         console.log("我很努力的學習");
       }
     };
 
-    const s1 = new Student("小張",15,"高一");
+    class Car {
+      constructor(name, price) {
+        this.name = name;
+        this.price = price;
+        // this.weel = 4;
+      }
+      //類中可以直接寫賦值語句,如下代碼的涵義是:給car的實例物件添加一個屬性，名為a，值為1
+      wheel = 4;
+    }
+    const c1 = new Car('BMW', 199);
+    const c2 = new Car('寶馬', 299);
+    console.log(c1);
+    console.log(c2);
+
+
+    const s1 = new Student("小張", 15, "高一");
     console.log(s1);
     s1.speak();
     s1.study();
