@@ -27,7 +27,7 @@
         //初始化狀態，用物件表示
         this.state = { isHot: true };
         //將Weather的changeWeather函數指向Weather然後賦值給Weather
-        //讓Weather裡有changeWeather的這個函數
+        //為Weather添加changeWeather函數
         //解決changeWeather中this指向問題
         this.changeWeather=this.changeWeather.bind(this);
       }
