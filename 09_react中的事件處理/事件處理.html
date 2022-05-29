@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <!-- 準備好一個容器 -->
+    <div id="test"></div>
+
+    <!-- 引入react核心庫-->
+    <script type="text/javascript" src="../JS/react.development.js"></script>
+    <!-- 引入react-dom用於支持react操作DOM -->
+    <script
+      type="text/javascript"
+      src="../JS/react-dom.development.js"
+    ></script>
+    <!-- 引入babel 用於將jsx轉為js -->
+    <script type="text/javascript" src="../JS/babel.min.js"></script>
+    <!-- 引入prop-types用於對標籤屬性進行限制 -->
+    <script type="text/javascript" src="../JS/prop-types.js"></script>
+    <!-- 此處一定要寫babel -->
+    <script type="text/babel">
+      //創建組件
+      class Demo extends React.Component {
+
+        //(1)通过onXxx属性指定事件處理函数(注意大小寫)
+        // a.React使用的是自定義(合成)事件, 而不是使用的原生DOM事件--為了更好的兼容性
+        // b.eact中的事件是通过事件委托方式處理的(委托给组件最外層的元素)--為了高效
+        //(2)通过event.target得到發生事件的DOM元素物件--不要過度使用ref
+
+        myRef = React.createRef();
+        myRef2 = React.createRef();
+        //展示左側入框的數據
+        showData = () => {
+          //解構賦值refs裡的input1
+          // console.log(this.refs);
+          alert(this.myRef.current.value);
+        };
+        //展示右側輸入框的數據
+        showData2 = (event) => {
+          //解構賦值refs裡的input1
+          // console.log(this.refs);
+          alert(event.target.value);
+        };
+
+        render() {
+          return (
+            <div>
+              {/*將此input儲存在myRef裡*/}
+              <input
+                ref={this.myRef}
+                type="text"
+                placeholder="點擊按鈕提示數據"
+              />
+              &nbsp;
+              <button onClick={this.showData}>點我提示左側的數據</button>&nbsp;
+              {/*發生事件跟觸發事件為同一個事件源*/}
+              {/*可以省略ref用event.target方式執行*/}
+              <input
+                onBlur={this.showData2}
+                type="text"
+                placeholder="失去焦點提示數據"
+              />
+              &nbsp;
+            </div>
+          );
+        }
+      }
+      //渲染組件到頁面
+      ReactDOM.render(<Demo />, document.getElementById('test'));
+    </script>
+  </body>
+</html>

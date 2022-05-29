@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <!-- 準備好一個容器 -->
+    <div id="test"></div>
+
+    <!-- 引入react核心庫-->
+    <script type="text/javascript" src="../JS/react.development.js"></script>
+    <!-- 引入react-dom用於支持react操作DOM -->
+    <script
+      type="text/javascript"
+      src="../JS/react-dom.development.js"
+    ></script>
+    <!-- 引入babel 用於將jsx轉為js -->
+    <script type="text/javascript" src="../JS/babel.min.js"></script>
+    <!-- 引入prop-types用於對標籤屬性進行限制 -->
+    <script type="text/javascript" src="../JS/prop-types.js"></script>
+    <!-- 此處一定要寫babel -->
+    <script type="text/babel">
+      //創建組件
+      class Demo extends React.Component {
+        //展示左側入框的數據
+        showData = () => {
+          //解構賦值refs裡的input1
+          //   console.log(this.refs);
+          const { input1 } = this.refs;
+          alert(input1.value);
+        };
+        //展示右側輸入框的數據
+        showData2 = () => {
+          const { input2 } = this.refs;
+          alert(input2.value);
+        };
+        render() {
+          return (
+            <div>
+              <input ref="input1" type="text" placeholder="點擊按鈕提示數據" />
+              &nbsp;
+              <button onClick={this.showData}>點我提示左側的數據</button>&nbsp;
+              <input
+                ref="input2"
+                onBlur={this.showData2}
+                type="text"
+                placeholder="失去焦點提示數據"
+              />
+            </div>
+          );
+        }
+      }
+      //渲染組件到頁面
+      ReactDOM.render(<Demo />, document.getElementById('test'));
+    </script>
+  </body>
+</html>

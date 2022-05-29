@@ -61,7 +61,8 @@
         // this.weel = 4;
       }
       //類中可以直接寫賦值語句,如下代碼的涵義是:給car的實例物件添加一個屬性，名為a，值為1
-      wheel = 4;
+      wheel = 4; //<--加給類的實例對象
+      static demo = 100; //<--加給類本身
     }
     const c1 = new Car('BMW', 199);
     const c2 = new Car('寶馬', 299);

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <!-- 準備好一個容器 -->
+    <div id="test1"></div>
+    <div id="test2"></div>
+    <div id="test3"></div>
+
+    <!-- 引入react核心庫-->
+    <script type="text/javascript" src="../JS/react.development.js"></script>
+    <!-- 引入react-dom用於支持react操作DOM -->
+    <script
+      type="text/javascript"
+      src="../JS/react-dom.development.js"
+    ></script>
+    <!-- 引入babel 用於將jsx轉為js -->
+    <script type="text/javascript" src="../JS/babel.min.js"></script>
+    <!-- 引入prop-types用於對標籤屬性進行限制 -->
+    <script type="text/javascript" src="../JS/prop-types.js"></script>
+    <!-- 此處一定要寫babel -->
+    <script type="text/babel">
+      //創建組件
+      // class Person extends React.Component {
+      //   //對標籤屬性進行類型、必要性限制
+      //   //static對類本身增加屬姓
+      //   static propTypes = {
+      //     //限制name為字符串並且需要填寫
+      //     name: PropTypes.string.isRequired, //限制name必傳，且為字符串
+      //     sex: PropTypes.string, //限制sex為字符串
+      //     age: PropTypes.number, //限制age為數值
+
+      //     //函數限制必須使用func，function為限制字
+      //     speak: PropTypes.func, //限制speak為函數
+      //   };
+
+      //   //預設限制，不填寫則顯示
+      //   static defaultProps = {
+      //     sex: '不男不女', //默認值為不男不女
+      //     age: 18, //默認值為18
+      //   };
+
+      //   render() {
+      //     // console.log(this);
+      //     const { name, age, sex, speak } = this.props;
+      //     // props是只讀的
+      //     // this.props.name="jack" <--此行代碼會報錯，因為props是只讀的
+      //     return (
+      //       <ul>
+      //         <li>性名:{name}</li>
+      //         <li>性別:{sex}</li>
+      //         <li>年齡:{age + 1}</li>
+      //       </ul>
+      //     );
+      //   }
+      // }
+
+      function Person(props) {
+        const { name, age, sex } = props;
+        return (
+          <ul>
+            <li>性名:{name}</li>
+            <li>性別:{sex}</li>
+            <li>年齡:{age}</li>
+          </ul>
+        );
+      }
+
+      //函數式組件限制的方法
+      Person.propTypes = {
+        //限制name為字符串並且需要填寫
+        name: PropTypes.string.isRequired, //限制name必傳，且為字符串
+        sex: PropTypes.string, //限制sex為字符串
+        age: PropTypes.number, //限制age為數值
+        //函數限制必須使用func，function為限制字
+        speak: PropTypes.func, //限制speak為函數
+      };
+      //預設限制，不填寫則顯示
+      Person.defaultProps = {
+        sex: '不男不女', //默認值為不男不女
+        age: 18, //默認值為18
+      };
+
+      //渲染組件到頁面
+      ReactDOM.render(
+        <Person name="春嬌" sex="女" age={18} />,
+        document.getElementById('test1')
+      );
+    </script>
+  </body>
+</html>
